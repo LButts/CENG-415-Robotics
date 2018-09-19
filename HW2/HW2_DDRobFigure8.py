@@ -69,13 +69,17 @@ def drive_circle_bottom():
     simTime.destroy_timer(timer_handle)
     msg = Float32()
 
-    circ = pi*30
-    moveTime = (2*circ)/15
+    circ = pi*14
+    moveTime = (2*circ)/7
+    if(count < 1):
+        moveTime = (2*circ)/(3*7)
 
-    msg.data = 16.2
-    publeft.publish(msg)
-    msg.data = 15.0
+    msg.data = 8.2
     pubright.publish(msg)
+    msg.data = 7.0
+    publeft.publish(msg)
+
+    count = count + 1
 
     timer_handle = simTime.create_timer(moveTime, drive_circle_top)
 
@@ -85,13 +89,13 @@ def drive_circle_top():
     simTime.destroy_timer(timer_handle)
     msg = Float32()
 
-    circ = pi*30
-    moveTime = (2*circ)/15
+    circ = pi*16
+    moveTime = (2*circ)/8
 
-    msg.data = 16.2
-    pubright.publish(msg)
-    msg.data = 15.0
+    msg.data = 9.2
     publeft.publish(msg)
+    msg.data = 8.0
+    pubright.publish(msg)
 
     timer_handle = simTime.create_timer(moveTime, drive_circle_bottom)
 
