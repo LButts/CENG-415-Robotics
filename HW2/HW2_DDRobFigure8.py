@@ -7,7 +7,7 @@ from struct import *
 from math import *
 
 rclpy.init()
-node = Node("Triangle")
+node = Node("Figure8")
 
 simTime= SimTimer(True, 'veranda/timestamp', node)
 
