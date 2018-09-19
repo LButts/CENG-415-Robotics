@@ -66,7 +66,7 @@ while rclpy.ok():
 
 plt.axis([-1, 11, 4, 16])
 plt.plot(x, y, 'g')
-plt.plot(xcomp, ycomp, 'b--')
+plt.plot(xcomp, ycomp, 'b^')
 plt.show()
 
 physNode.destroy_node()
