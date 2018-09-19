@@ -19,16 +19,10 @@ ycomp = [None]*100
 def callbackP(msg):
     global varP
     varP = msg.data
-    print("reading physData message")
-    print('\n')
-    #print(varP)
 
 def callbackT(msg):
     global varT
     varT = msg.data
-    print("reading thetaData message")
-    print('\n')
-    #print(varT)
 
 def twolinkfk(a1, a2, theta1, theta2):
  x = a2*math.cos(theta1+theta2)+a1*math.cos(theta1)
@@ -44,18 +38,14 @@ while rclpy.ok():
     rclpy.spin_once(physNode)
     if(count % 2 != 0):
         x = varP
-        #print(x)
     else:
         y = varP
-        #print(y)
 
     rclpy.spin_once(thetaNode)
     if(count % 2 != 0):
         theta1 = varT
-        #print(theta1)
     else:
         theta2 = varT
-        #print(theta2)
 
     if(count >= 2):
         for i in range(100):
@@ -66,7 +56,7 @@ while rclpy.ok():
 
 plt.axis([-1, 11, 4, 16])
 plt.plot(x, y, 'g')
-plt.plot(xcomp, ycomp, 'b^')
+plt.plot(xcomp, ycomp, 'b--')
 plt.show()
 
 physNode.destroy_node()
