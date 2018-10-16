@@ -3,7 +3,7 @@ from rclpy.node import Node
 from math import *
 from std_msgs.msg import Float32MultiArray
 from std_msgs.msg import Int32
-
+from std_msgs.msg import Twist
 rclpy.init()
 
 p1 = [None]*100
@@ -16,7 +16,7 @@ l = 20
 
 subNode = rclpy.create_node('min_sub')
 ForwardK = rclpy.create_node('minimal_publisher')
-FKPub = ForwardK.create_publisher(Float32MultiArray, 'RobotVel')
+FKPub = ForwardK.create_publisher(Twist, 'RobotVel')
 
 def callback(msg):
   global var
