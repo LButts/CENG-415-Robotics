@@ -26,6 +26,8 @@ def getTargetPos(message):
 	goal[1] = message.y
 	goal[2] = ((message.theta*180/pi)%360)
 
+	print("Inside getTargetPos")
+
 	# print("Target: (" + str(message.x) + "," + str(message.y) + ") theta: " + str((message.theta*180/pi) % 360))
 	travelCalc()
 
@@ -37,9 +39,9 @@ def get_lidar(message):
 	mid_right = message.ranges[16]
 	right = message.ranges[8]
 
-	print ("Left: " + str(left))
-	print ("Right: " + str(right))
-	print ("Mid: " + str(mid))
+	# print ("Left: " + str(left))
+	# print ("Right: " + str(right))
+	# print ("Mid: " + str(mid))
 
 	motionFunc()
 
@@ -66,25 +68,6 @@ def turn_to_goal():
 		publeft.publish(msg)
 
 
-# def turn_left():
-#
-# 	print("\nAt turn_left() bump is: ", bump)
-#
-# 	msg = Float32()
-#
-# 	for i in range(30):
-# 		msg.data = -5.0
-# 		pubright.publish(msg)
-# 		publeft.publish(msg)
-#
-# 	for i in range(30):
-# 		msg.data = 0.0
-# 		pubright.publish(msg)
-# 		publeft.publish(msg)
-#
-# 	travel[2] += 90
-# 	turn_to_goal()
-
 def turnAway():
 	global left, right, mid, mid_left, mid_right, position, travel, goal
 	msg = Float32()
@@ -108,26 +91,33 @@ def turnAway():
 		pubright.publish(msg)
 
 def drive():
-	global position, travel, goal, bump
+	global position, travel, goal, bump, wallFollow
 
-	if position[2] > (travel[2] - 10) and position[2] < (travel[2] + 10):
-		msg = Float32()
-		msg.data = 4.0
-		pubright.publish(msg)
-		msg.data = 4.0
-		publeft.publish(msg)
-		# print("On correct path\n")
+	# if position[2] > (travel[2] - 10) and position[2] < (travel[2] + 10):
+	msg = Float32()
+	msg.data = 4.0
+	pubright.publish(msg)
+	msg.data = 4.0
+	publeft.publish(msg)
+	# print("On correct path\n")
 
-	else:
+	if travel[2] == firstAngle:
 		turn_to_goal()
 
 
 def travelCalc():
-	global position, travel, goal, bump
+	global position, travel, goal, bump, flag, firstAngle
 
 	travel = [(goal[0] - position[0]), (goal[1] - position[1]), atan2((goal[1] - position[1]), (goal[0] - position[0]))*(180/pi)]
 	if travel[2] < 0:
 		travel[2] += 360
+
+
+	if flag == 0:
+		firstAngle = travel[2]
+		print("Setting firstAngle as: ", firstAngle)
+		flag += 1
+
 
 	print("Position angle: ", position[2])
 	print("Travel angle: ", travel[2])
@@ -135,10 +125,17 @@ def travelCalc():
 
 
 def motionFunc():
-	global position, travel, goal, bump, mid, left, right
-	# print("Inside Motion Function\n")
+	global position, travel, goal, bump, mid, left, right, flag2, firstAngle
+	print("Inside Motion Function, flag2 value is: ", flag2, " and firstAngle value is: ", firstAngle)
 
-	if mid > 2 and left > 2 and right > 2:
+	if position[2] >= (firstAngle - 10) and position[2] <= (firstAngle + 10) and firstAngle != 0:
+		print("Inside motion func, position angle is: ", position[2], " and firstAngle is: ", firstAngle)
+		flag2 = 1
+
+	if flag2 == 0:
+		turn_to_goal()
+
+	elif mid > 2 and left > 2 and right > 2:
 		drive()
 
 	else:
@@ -160,6 +157,10 @@ position = [0, 0, 0]
 bump = 0
 count = 0
 left, right, mid = 0, 0, 0
+flag = 0
+flag2 = 0
+firstAngle = 0
+
 
 rclpy.spin(node)
 node.destroy_node()

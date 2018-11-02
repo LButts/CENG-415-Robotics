@@ -21,7 +21,7 @@ def updatePos(message):
 
 
 def getTargetPos(message):
-	global position, travel, goal, bump
+	global position, travel, goal, bump, flag
 	goal[0] = message.x
 	goal[1] = message.y
 	goal[2] = ((message.theta*180/pi)%360)
@@ -65,25 +65,6 @@ def turn_to_goal():
 		pubright.publish(msg)
 		publeft.publish(msg)
 
-
-# def turn_left():
-#
-# 	print("\nAt turn_left() bump is: ", bump)
-#
-# 	msg = Float32()
-#
-# 	for i in range(30):
-# 		msg.data = -5.0
-# 		pubright.publish(msg)
-# 		publeft.publish(msg)
-#
-# 	for i in range(30):
-# 		msg.data = 0.0
-# 		pubright.publish(msg)
-# 		publeft.publish(msg)
-#
-# 	travel[2] += 90
-# 	turn_to_goal()
 
 def turnAway():
 	global left, right, mid, mid_left, mid_right, position, travel, goal
@@ -155,11 +136,13 @@ lidar = node.create_subscription(LaserScan, 'robot1/lidar', get_lidar)
 
 
 goal = [100, 0, 0]
+flag = 0
 travel = [0, 0, 0]
 position = [0, 0, 0]
 bump = 0
 count = 0
 left, right, mid = 0, 0, 0
+
 
 rclpy.spin(node)
 node.destroy_node()

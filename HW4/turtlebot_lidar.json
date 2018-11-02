@@ -62,15 +62,15 @@
                 },
                 {
                     "key": "GlobalPos/Theta",
-                    "value": 0
+                    "value": "90"
                 },
                 {
                     "key": "GlobalPos/X",
-                    "value": 0
+                    "value": "0.6"
                 },
                 {
                     "key": "GlobalPos/Y",
-                    "value": "-0.6"
+                    "value": 0
                 },
                 {
                     "key": "Name",
@@ -90,7 +90,7 @@
                 },
                 {
                     "key": "density",
-                    "value": 1
+                    "value": 5
                 },
                 {
                     "key": "is_driven",
@@ -143,15 +143,15 @@
                 },
                 {
                     "key": "GlobalPos/Theta",
-                    "value": 0
+                    "value": "90"
                 },
                 {
                     "key": "GlobalPos/X",
-                    "value": 0
+                    "value": "-0.6"
                 },
                 {
                     "key": "GlobalPos/Y",
-                    "value": "0.6"
+                    "value": 0
                 },
                 {
                     "key": "Name",
@@ -171,7 +171,7 @@
                 },
                 {
                     "key": "density",
-                    "value": 1
+                    "value": 5
                 },
                 {
                     "key": "is_driven",
@@ -184,6 +184,47 @@
                 {
                     "key": "wheel_width",
                     "value": 0.20000000000000001
+                }
+            ]
+        },
+        {
+            "pluginName": "org.roboscience.veranda.worldObjectComponent.defaults.touchring",
+            "properties": [
+                {
+                    "key": "GlobalPos/Theta",
+                    "value": 0
+                },
+                {
+                    "key": "GlobalPos/X",
+                    "value": 0
+                },
+                {
+                    "key": "GlobalPos/Y",
+                    "value": 0
+                },
+                {
+                    "key": "Name",
+                    "value": "Touch Ring"
+                },
+                {
+                    "key": "angle_end",
+                    "value": 360
+                },
+                {
+                    "key": "angle_start",
+                    "value": 0
+                },
+                {
+                    "key": "channels/output_touches",
+                    "value": "robot0/touches"
+                },
+                {
+                    "key": "ring_radius",
+                    "value": 1
+                },
+                {
+                    "key": "sensor_count",
+                    "value": "20"
                 }
             ]
         },
@@ -277,52 +318,11 @@
             ]
         },
         {
-            "pluginName": "org.roboscience.veranda.worldObjectComponent.defaults.touchring",
-            "properties": [
-                {
-                    "key": "GlobalPos/Theta",
-                    "value": 0
-                },
-                {
-                    "key": "GlobalPos/X",
-                    "value": 0
-                },
-                {
-                    "key": "GlobalPos/Y",
-                    "value": 0
-                },
-                {
-                    "key": "Name",
-                    "value": "Touch Ring"
-                },
-                {
-                    "key": "angle_end",
-                    "value": 360
-                },
-                {
-                    "key": "angle_start",
-                    "value": 0
-                },
-                {
-                    "key": "channels/output_touches",
-                    "value": "robot1/touches"
-                },
-                {
-                    "key": "ring_radius",
-                    "value": 1
-                },
-                {
-                    "key": "sensor_count",
-                    "value": 10
-                }
-            ]
-        },
-        {
             "pluginName": "org.roboscience.veranda.worldObjectComponent.defaults.lidar",
             "properties": [
                 {
                     "key": "GlobalPos/Theta",
-                    "value": 0
+                    "value": "90"
                 },
                 {
                     "key": "GlobalPos/X",
